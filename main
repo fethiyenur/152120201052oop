@@ -1,1 +1,48 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
+int main() {
+    //! Dosyayı okuma modunda açtım
+   ifstream dosya("input.txt");
+
+    //! Dosyanın açılıp açılmadığını kontrol ettim
+    if (!dosya.is_open()) {
+        cerr << "File could not be open!" << endl;
+        return 1; //! Program hata koduyla sonlandırılır
+    }
+    
+    //! Dosyadan ilk satırdaki sayıyı okutuyorum ki kaç sayı var bilelim
+    int sayi;
+    dosya >> sayi;
+
+    //! Sayıları saklamak için vektör oluşturdum
+    vector<int> sayilar(sayi);
+
+    //! Dosyadan tam sayıları okuttum ve vektöre ekledim
+    for (int i = 0; i < sayi; ++i) {
+        dosya >> sayilar[i];
+    }
+
+    
+    dosya.close(); //! Dosyayı kapattım
+
+    int sum = 0;
+    int product = 1;
+    int smallest = sayilar[0]; //! En küçük sayıyı bulmak için ilk sayıyı en küçük varsaydım
+    for (int sayi : sayilar) {
+        sum += sayi;
+        product *= sayi;
+        smallest = min(smallest, sayilar[0]);
+    }
+    int avg = sum / sayi;
+
+    cout << "Sum is " << sum << endl;
+    cout << "Product is " << product << endl;
+    cout << "Smallest is " << smallest << endl;
+    cout << "Average is " << avg << endl;
+   
+
+    return 0;
+}
 
